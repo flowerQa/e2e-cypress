@@ -12,7 +12,9 @@ describe('to do app', () => {
         aboutLabel: '[data-automationid="about-page"]',
         deleteItemButton: '[data-cy="delete-btn"]',
         editButton: '[data-cy="edit-btn"]',
-        editTextField: '[data-cy="edit-text"]'
+        editTextField: '[data-cy="edit-text"]',
+        saveButton : '[data-cy="save-btn"]',
+        itemLabel : '[data-cy="label"]'
         }; 
 
     // beforeEach(() => {
@@ -99,21 +101,22 @@ describe('to do app', () => {
 });
 
 //3. Edit an Item in todo list and check the text
-    it.only('Delete the item from the list', () => {
+   //3. Edit an Item in todo list and check the text
+   it('Delete the item from the list', () => {
     cy.visit('http://localhost:4200/todo')
 
     cy.get(S.inputField).type('Option1')
     cy.get(S.addButton).click()
 
-    cy.get(S.inputField).type('Option2')
-    cy.get(S.addButton).click()
+    // cy.get(S.inputField).type('Option2')
+    // cy.get(S.addButton).click()
 
-    cy.get(S.editButton).eq(0).click()
+    cy.get(S.editButton).click()
     cy.get(S.editTextField).clear()
 
     cy.get(S.editTextField).type('new year')
-    cy.get(S.editButton).eq(0).click()
-    cy.get(S.inputField).eq(0).should('have.text','new year')
+    cy.get(S.saveButton).click()
+    cy.get(S.itemLabel).should('have.text','new year')
 
     
 });
